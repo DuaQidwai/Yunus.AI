@@ -5,13 +5,13 @@ import 'package:http/http.dart' as http;
 class OpenAIService {
   final List<Map<String, String>> messages = [];
   static const apiUri = 'https://api.openai.com/v1/chat/completions';
-  static const apiKey = 'sk-HASFUAEWgmGmDdKq3KwjcGssyPB79cIFSNM3T3W13ZT3BlbkFJP_gP8lYsKDLaymxjE8tM4Mfcc_8egMunPlJVVpOoIA';
+  static const apiKey = ' sk-HASFUAEWgmGmDdKq3KwjcGssyPB79cIFSNM3T3W13ZT3BlbkFJP_gP8lYsKDLaymxjE8tM4Mfcc_8egMunPlJVVpOoIA';
 
   Future<String> chatGPTAPI(String prompt) async {
     messages.add({
       "role": "user",
       "content":
-          "You are a financial advice bot called Younes and you are supposed to only give financial and technological advice to startups.$prompt",
+          "You are a banking bot called bankbot and you are supposed to only talk about banking.$prompt",
     });
     try {
       final res = await http.post(
@@ -33,6 +33,7 @@ class OpenAIService {
       if (res.statusCode == 200) {
         String content =
             jsonDecode(res.body)['choices'][0]['message']['content'];
+         //specifically going into content 
         content = content.trim();
 
         messages.add({
@@ -47,3 +48,5 @@ class OpenAIService {
     }
   }
 }
+
+ 
